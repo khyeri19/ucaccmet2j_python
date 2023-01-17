@@ -90,3 +90,31 @@ print('The total monthly values are:', list_of_months)
 
 with open ('results.json', 'w', encoding='utf-8') as file:
     json.dump(list_of_months, file, indent = 4)
+
+#PART 2
+total_yearly_precipitation = 0
+for value in list_of_months:
+    total_yearly_precipitation = total_yearly_precipitation + value
+
+print ('Total yearly precipitation is:', total_yearly_precipitation)
+
+all_city_total_precipitation = 0
+for measurement in list_of_dictionary:
+    value = measurement["value"]
+    all_city_total_precipitation = all_city_total_precipitation + value
+
+#print ('all city total:', all_city_total_precipitation)
+
+
+relative_precipitation_list = []
+for monthly_value in list_of_months:
+    relative_precipitation = monthly_value/total_yearly_precipitation
+    rounded_relative_precipitation = round(relative_precipitation, 2)
+    relative_precipitation_list.append(rounded_relative_precipitation)
+    
+print ('Relative monthly precitipation of Seattle is:', relative_precipitation_list)
+
+
+with open ('results.json', 'w', encoding='utf-8') as file:
+    json.dump(relative_precipitation_list, file, indent = 4)
+    
