@@ -108,3 +108,5 @@ results = {
 
 with open ('results.json', 'w', encoding='utf-8') as file:
     json.dump(results, file, indent = 4)
+
+#calculate_monthly('GHCND:US1WAKG0038')
