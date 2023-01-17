@@ -66,7 +66,6 @@ for measurement in list_of_dictionary:
 #    total_monthly_precipitation += dictionary['value']  
 
 
-
 list_of_months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 for months in seattle:
     date = str(months['date'])
@@ -109,4 +108,28 @@ results = {
 with open ('results.json', 'w', encoding='utf-8') as file:
     json.dump(results, file, indent = 4)
 
-#calculate_monthly('GHCND:US1WAKG0038')
+#PART 3
+#with open("stations.csv") as file:
+#    dict_station = {}
+#    headers = file.readline()
+#    for line in dict_station:
+#        (Location, State, Station) = line.strip().split(',')
+#        dict_station[Location] = {
+#            'State': '',
+#            'Station': ()
+#        }
+
+from csv import DictReader
+with open('stations.csv') as file:
+    reader = DictReader(file, ("Location", "State", "Station"))
+
+station_code = reader['Station']
+def calculate_monthly():
+    total_precipitation_monthly = [0]*12
+    for measurement in list_of_dictionary:
+        if measurement["station"] == station_code:
+            date_split = (measurement['date'].split('-'))
+            month = int(date_split[1])
+            total_precipitation_monthly[month -1] += measurement['value']
+
+print(calculate_monthly("USW00093814"))
