@@ -3,12 +3,6 @@ import json
 with open('precipitation.json', encoding = 'utf-8') as file:
     list_of_dictionary = json.load(file)
 
-from csv import DictReader
-
-with open('stations.csv') as file:
-    reader = DictReader(file)
-#    list_of_dictionary = list(reader)
-
 #print(list_of_dictionary)
 
 #PART 1: Seattle
@@ -52,8 +46,6 @@ for measurement in list_of_dictionary:
 #        if date[1] == (f"0{month}") or (f"{month}"):
 #            precipitation[month].append(measurement["value"])
 
-
-
 #print(precipitation[4])
 #list_sum = []
 #monthly_sum = 0
@@ -62,8 +54,6 @@ for measurement in list_of_dictionary:
 #        monthly_sum = monthly_sum + day
 #        list_sum.append(monthly_sum)
     
-
-
 #dates = []
 #for measurement in seattle:
 #    date = measurement["date"] 
@@ -98,14 +88,6 @@ for value in list_of_months:
 
 print ('Total yearly precipitation is:', total_yearly_precipitation)
 
-all_city_total_precipitation = 0
-for measurement in list_of_dictionary:
-    value = measurement["value"]
-    all_city_total_precipitation = all_city_total_precipitation + value
-
-#print ('all city total:', all_city_total_precipitation)
-
-
 relative_precipitation_list = []
 for monthly_value in list_of_months:
     relative_precipitation = monthly_value/total_yearly_precipitation
@@ -114,7 +96,15 @@ for monthly_value in list_of_months:
     
 print ('Relative monthly precitipation of Seattle is:', relative_precipitation_list)
 
+results = {
+    "Seattle":{
+        "station": "GHCND:US1WAKG0038",
+        "state": "WA",
+        "total_monthly_precipitation": list_of_months,
+        "total_yearly_precipitation": total_yearly_precipitation,
+        "relative_monthly_precipitation": relative_precipitation_list
+        }
+    }
 
 with open ('results.json', 'w', encoding='utf-8') as file:
-    json.dump(relative_precipitation_list, file, indent = 4)
-    
+    json.dump(results, file, indent = 4)
