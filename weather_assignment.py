@@ -87,3 +87,6 @@ for months in seattle:
     value = months['value']
     list_of_months[index] += value
 print('The total monthly values are:', list_of_months)
+
+with open ('results.json', 'w', encoding='utf-8') as file:
+    json.dump(list_of_months, file, indent = 4)
